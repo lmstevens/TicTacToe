@@ -1,4 +1,4 @@
-package com.nick.ttt;
+package com.nick.ttt.tests.com.nick.ttt;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -6,10 +6,25 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import com.nick.ttt.TicTacToeBoard;
+import com.nick.ttt.TicTacToeGame;
+
 class UnitTests {
+    /**
+     * IN PROGRESS: Creates ArrayLists of TicTacToeBoards to use in Unit Testing @Tests.
+     */
+    ArrayList<TicTacToeBoard> testXBoardList = new ArrayList<TicTacToeBoard>();
+
+    @BeforeAll
+    public static void createWinningXBoards(){
+        // TicTacToeBoard testBoard = new TicTacToeBoard();
+            testXBoardList.add(new TicTacToeBoard(new char[]{'X', 'X', 'X', ' ', ' ', ' ', ' ', ' ', ' '}));
+    }
+    
     /**
      * Tests placing a single piece on an empty board.
      */
+
 
     @Test
     void placePiece() {
@@ -63,4 +78,30 @@ class UnitTests {
         }
         return totalEmpties == n;
     }
+    
+    /**
+     * IN PROGRESS Tests the gameWon() function by calling TicTacToeBoards from testXBoardList.
+     */
+    @Test
+    void gameWonTest() {
+
+        TicTacToeBoard winningBoard = new TicTacToeBoard(testXBoardList.get(0));
+        Assertions.assertTrue(winningBoard.gameWon());
+    }
+
+    /**
+     * IN PROGRESS Tests the gameWon() function on not winning board.
+     * Want to call TicTacToeBoards from new ArrayList created in @BeforeAll annotation
+     * for NotWinning TicTacToeBoards.
+     */
+    @Test
+    void gameNotWonTest() {
+
+        TicTacToeBoard winningBoard = new TicTacToeBoard(new char[]{'X', 'O', 'X',
+                                                                    ' ', 'O', 'O',
+                                                                    ' ', ' ', ' '});
+        Assertions.assertFalse(winningBoard.gameWon());
+    }
+
+
 }
